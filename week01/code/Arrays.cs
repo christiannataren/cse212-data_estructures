@@ -15,6 +15,8 @@ public static class Arrays
         // step by step before you write the code. The plan should be clear enough that it could
         // be implemented by another person.
 
+
+        /* Christian Nataren */
         //Start creating a list where the results will be saved
         //Loop as much times as indicated by the lenght + 1 and starting  the loopCounter from 1 and incrementing the loopcount by 1
         //Add the result of the operation (number * loopCounter) in the list
@@ -44,6 +46,7 @@ public static class Arrays
         // step by step before you write the code. The plan should be clear enough that it could
         // be implemented by another person.
 
+        /* Christian Nataren */
         //Start looping by the amount of numbers will be moving
         //Save in a variable the last number, it alway be the total of the data size - 1
         /// Make a copy of the data
