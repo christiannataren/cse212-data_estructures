@@ -1,3 +1,4 @@
+using System.Diagnostics;
 using System.Text.Json;
 
 public static class SetsAndMaps
@@ -22,7 +23,28 @@ public static class SetsAndMaps
     public static string[] FindPairs(string[] words)
     {
         // TODO Problem 1 - ADD YOUR CODE HERE
-        return [];
+        HashSet<string> reversed = new HashSet<string>();
+        List<String> founds = new List<string>();
+        foreach (var word in words)
+        {
+
+            var reverseWord = Reverse(word);
+            if (reversed.Contains(reverseWord))
+            {
+                var match = $"{word} & {reverseWord}";
+                founds.Add(match);
+            }
+            reversed.Add(word);
+        }
+
+        return founds.ToArray();
+    }
+
+    public static String Reverse(String text)
+    {
+        char[] chars = text.ToCharArray();
+        Array.Reverse(chars);
+        return new string(chars);
     }
 
     /// <summary>
@@ -42,6 +64,15 @@ public static class SetsAndMaps
         foreach (var line in File.ReadLines(filename))
         {
             var fields = line.Split(",");
+            var degree = fields[3];
+            if (degrees.ContainsKey(degree))
+            {
+                degrees[degree] = degrees[degree] + 1;
+            }
+            else
+            {
+                degrees.Add(degree, 1);
+            }
             // TODO Problem 2 - ADD YOUR CODE HERE
         }
 
@@ -64,9 +95,52 @@ public static class SetsAndMaps
     /// Reminder: You can access a letter by index in a string by 
     /// using the [] notation.
     /// </summary>
+
+
     public static bool IsAnagram(string word1, string word2)
     {
         // TODO Problem 3 - ADD YOUR CODE HERE
+        word1 = word1.ToLower().Replace(" ", string.Empty);
+        word2 = word2.ToLower().Replace(" ", string.Empty);
+
+        if (word1.Length == word2.Length)
+        {
+            Dictionary<char, int> letters = new Dictionary<char, int>();
+            for (int i = 0; i < word1.Length; i++)
+            {
+                if (letters.ContainsKey(word1[i]))
+                {
+                    letters[word1[i]] = letters[word1[i]] + 1;
+                }
+                else
+                {
+                    letters.Add(word1[i], 1);
+                }
+            }
+            for (int i = 0; i < word2.Length; i++)
+            {
+                if (letters.ContainsKey(word2[i]))
+                {
+                    if (letters[word2[i]] > 1)
+                    {
+                        letters[word2[i]] = letters[word2[i]] - 1;
+                    }
+                    else
+                    {
+                        letters.Remove(word2[i]);
+                    }
+
+                }
+
+            }
+            Debug.WriteLine($"Count: {letters.Count()}");
+            if (letters.Count() == 0)
+            {
+                return true;
+            }
+
+        }
+
         return false;
     }
 
